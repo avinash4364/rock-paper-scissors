@@ -1,41 +1,33 @@
-// This is main function which lets user play rock-paper-scissors against computer 5 times.
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
-    // function to ask user to choose b/w rock , paper and scissors
-    // a user can enter his option in capital or small letters
     function getHumanChoice() {
         let choice = prompt("Choose b/w rock, paper and scissors")
             .toLowerCase()
             .trim();
         const choiceArray = ["rock", "paper", "scissors"];
         if (choice && choiceArray.includes(choice))
-            return choice; // here it is also checked for undefined values
-        // if he choses any other options than the ones in the choiceArray
-        // he is given one more chance to make the correct choice again, otherwise he loses to computer by default
+            // checks for undefined values
+            return choice;
         else {
             choice = prompt("You Chose wrong, Try again").toLowerCase().trim();
             if (choice && choiceArray.includes(choice)) return choice;
             else {
                 alert("Well, You chose wrong again, computer wins by default");
-                return ""; // return an empty string if the user choses nothing or any value other than rock, paper and scissors
+                return "";
             }
         }
     }
 
-    // get computer choice b/w rock , paper and scissors using Math.random() function of JavaScript
     function getComputerChoice() {
         const choiceArray = ["rock", "paper", "scissors"];
         const random = Math.floor(Math.random() * 3);
         return choiceArray[random];
     }
 
-    // comparing the human choice and computer choice and incrementing the score of the winner
-    // the score of both human and computer is a top local variable so that it is accessible everywhere in the current function.
     function playRound(humanChoice, computerChoice) {
         if (humanChoice) {
-            // if human chose amongst rock, paper and scissors
             console.log(
                 `human chose ${humanChoice} and computer chose ${computerChoice}`
             );
@@ -55,7 +47,6 @@ function playGame() {
                 }
             }
         } else {
-            // if the human chose the wrong option (which could be null, undefined or other values)
             console.log(
                 "human chose the wrong option and computer wins by default"
             );
@@ -63,8 +54,6 @@ function playGame() {
         }
     }
 
-    // function which lets user and computer play n rounds of rock-paper-scissors with each other
-    // by default they will play with each other 5 times - done using default parameter
     function playNRounds(rounds = 5) {
         let humanChoice;
         let computerChoice;
@@ -90,9 +79,7 @@ function playGame() {
         }
     }
 
-    // play game b/w computer and user n times (by default it is 5 times)
     playNRounds();
 }
 
-// play rock-paper-scissors b/w user and computer
 playGame();
