@@ -6,16 +6,16 @@ function playGame() {
     // function to ask user to choose b/w rock , paper and scissors
     // a user can enter his option in capital or small letters
     function getHumanChoice() {
-        let choice = prompt(
-            "Choose b/w rock, paper and scissors"
-        ).toLowerCase();
+        let choice = prompt("Choose b/w rock, paper and scissors")
+            .toLowerCase()
+            .trim();
         const choiceArray = ["rock", "paper", "scissors"];
         if (choice && choiceArray.includes(choice))
             return choice; // here it is also checked for undefined values
         // if he choses any other options than the ones in the choiceArray
         // he is given one more chance to make the correct choice again, otherwise he loses to computer by default
         else {
-            choice = prompt("You Chose wrong, Try again").toLowerCase();
+            choice = prompt("You Chose wrong, Try again").toLowerCase().trim();
             if (choice && choiceArray.includes(choice)) return choice;
             else {
                 alert("Well, You chose wrong again, computer wins by default");
@@ -86,7 +86,7 @@ function playGame() {
                     "%cYou Win😀🥳",
                     "font-size:36px; font-weight:bold;"
                 ); // the %c specifier acts as a placeholder for where the CSS styling should begin and the second argument can be used to specify the CSS styling to apply
-            } else console.log("%cYou Lost🥹😕", "font-size:12px");
+            } else console.log("%cYou Lost🥹😕", "font-size:18px");
         }
     }
 
