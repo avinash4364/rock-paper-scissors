@@ -8,7 +8,8 @@ function playGame() {
             .trim();
         const choiceArray = ["rock", "paper", "scissors"];
         if (choice && choiceArray.includes(choice))
-            return choice; // here it is also checked for undefined values
+            // checks for undefined values
+            return choice;
         else {
             choice = prompt("You Chose wrong, Try again").toLowerCase().trim();
             if (choice && choiceArray.includes(choice)) return choice;
