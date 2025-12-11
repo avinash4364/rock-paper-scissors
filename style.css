@@ -1,0 +1,213 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    --background: #fffffc;
+    --black: #000;
+    --orange: #ff3f00;
+    --yellow: #ff7f11;
+    --beige: #beb7a4;
+}
+
+body {
+    box-sizing: border-box;
+    min-height: 100vh;
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: var(--background);
+    font-variation-settings: "wdth" 100;
+    font-size: 1.6rem;
+    position: relative;
+}
+
+button {
+    border: none;
+    font-family: inherit;
+    color: inherit;
+}
+
+.overlay {
+    position: absolute;
+    display: none;
+    height: 100vh;
+    width: 100%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.97);
+}
+
+.overlay.game-start {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    justify-content: center;
+}
+
+.overlay.game-start .overlay-btn {
+    padding: 1.2rem 3.6rem;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: var(--orange);
+    border-radius: 5px;
+    color: var(--black);
+}
+
+.overlay .rps-img {
+    width: 25.6rem;
+}
+
+.overlay .winning-msg {
+    color: var(--yellow);
+    text-transform: uppercase;
+    font-size: 2.4rem;
+    font-weight: 700;
+    font-family: "Audiowide", sans-serif;
+    letter-spacing: 1.5px;
+    word-spacing: 5px;
+}
+
+.overlay .winning-msg span {
+    text-transform: lowercase;
+}
+
+.main-heading {
+    font-family: "Audiowide", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 7.2rem;
+    margin-bottom: 10rem;
+    text-align: center;
+    color: var(--orange);
+    background-color: var(--beige);
+    padding: 2.4rem 0;
+}
+
+.game-container {
+    max-width: min(75%, 80rem);
+    margin: 0 auto;
+}
+
+.game-screen {
+    display: flex;
+    margin-bottom: 6rem;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    border: 7px solid var(--black);
+    border-radius: 7px;
+}
+
+.game-screen > :first-child {
+    border-right: 3.5px solid var(--black);
+}
+
+.game-screen > :last-child {
+    border-left: 3.5px solid var(--black);
+}
+
+.game-screen > * {
+    flex: 1;
+}
+
+.game-screen img {
+    padding: 2.4rem;
+    max-width: min(256px, 50%);
+    visibility: hidden;
+}
+
+.game-screen.visible img {
+    visibility: visible;
+}
+
+.game-screen .played-hand {
+    text-transform: uppercase;
+    font-size: 3.2rem;
+    font-family: "Audiowide", sans-serif;
+    background-color: var(--beige);
+    color: var(--orange);
+    padding: 1.2rem 2.4rem;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.buttons > * {
+    padding: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons img {
+    width: 6.4rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.buttons .sign-name {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.score-container {
+    width: 50%;
+    margin: 0 auto 6rem auto;
+    position: relative;
+    border: 5px solid var(--black);
+}
+
+.score-container .rps-img {
+    width: 6.4rem;
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+.score-container .score-box {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.score-box > * {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.score-box .score {
+    color: var(--orange);
+    font-size: 6.4rem;
+    padding: 2rem;
+    background-color: var(--beige);
+}
+
+.score-container .score-box h3 {
+    border-bottom: 5px solid var(--black);
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-family: "Audiowide", sans-serif;
+    text-transform: uppercase;
+}
+
+.score.human-score {
+    border-right: 2.5px solid var(--black);
+}
+
+.score.computer-score {
+    border-left: 2.5px solid var(--black);
+}
