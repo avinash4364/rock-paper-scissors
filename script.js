@@ -1,7 +1,10 @@
 const humanScore = document.querySelector(".human-score");
 const computerScore = document.querySelector(".computer-score");
+const userChoiceImg = document.getElementById("user-choice--img");
+const computerChoiceImg = document.getElementById("computer-choice--img");
 const overlayBtn = document.querySelector(".overlay-btn");
 const handSigns = document.querySelectorAll(".buttons img");
+const score = document.querySelector(".score");
 
 function getComputerChoice() {
     const choiceArray = ["rock", "paper", "scissors"];
@@ -10,8 +13,6 @@ function getComputerChoice() {
 }
 
 function displayChoice(humanChoice, computerChoice) {
-    const userChoiceImg = document.getElementById("user-choice--img");
-    const computerChoiceImg = document.getElementById("computer-choice--img");
     userChoiceImg.src = `images/${humanChoice}.svg`;
     computerChoiceImg.src = `images/${computerChoice}.svg`;
     userChoiceImg.classList.remove("hidden");
@@ -27,7 +28,8 @@ function displayChoice(humanChoice, computerChoice) {
     computerChoiceImg.classList.add("animate-pop");
 }
 
-function playRound(humanChoice) {
+function playRound(e) {
+    const humanChoice = e.target.getAttribute("data-value");
     const computerChoice = getComputerChoice();
     displayChoice(humanChoice, computerChoice);
     let hScore = parseInt(humanScore.textContent);
@@ -58,17 +60,42 @@ function playRound(humanChoice) {
     console.log(
         `human chose ${humanChoice} and computer chose ${computerChoice}`
     );
+    if (humanScore.textContent == "5" || computerScore.textContent == "5") {
+        setTimeout(restartGame, 200);
+    }
 }
 
 function removeOverlay() {
     overlayBtn.parentElement.classList.remove("game-start");
 }
 
-// once
-overlayBtn.addEventListener("click", removeOverlay);
+function addOverlay() {
+    overlayBtn.parentElement.classList.add("game-start");
+}
 
-handSigns.forEach((handSign) =>
-    handSign.addEventListener("click", function (e) {
-        playRound(e.target.getAttribute("data-value"));
-    })
-);
+function startGame() {
+    removeOverlay();
+    handSigns.forEach((handSign) =>
+        handSign.addEventListener("click", playRound)
+    );
+}
+
+function restartGame() {
+    overlayBtn.textContent = "restart";
+    const winningMsg = document.querySelector(".winning-msg");
+    winningMsg.textContent =
+        parseInt(humanScore.textContent) === parseInt(computerScore.textContent)
+            ? "It's a draw 😕😕"
+            : parseInt(humanScore.textContent) >
+              parseInt(computerScore.textContent)
+            ? "You Won 🤩🤩"
+            : "You lost 😞😞";
+
+    humanScore.textContent = 0;
+    computerScore.textContent = 0;
+    userChoiceImg.classList.add("hidden");
+    computerChoiceImg.classList.add("hidden");
+    addOverlay();
+}
+
+overlayBtn.addEventListener("click", startGame);
