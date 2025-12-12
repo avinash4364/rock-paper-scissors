@@ -6,6 +6,7 @@
 
 html {
     font-size: 62.5%;
+    height: 100%;
     --background: #fffffc;
     --black: #000;
     --orange: #ff3f00;
@@ -15,6 +16,9 @@ html {
 
 body {
     box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     font-family: "Open Sans", sans-serif;
     font-optical-sizing: auto;
@@ -34,7 +38,7 @@ button {
 .overlay {
     position: absolute;
     display: none;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.97);
@@ -68,7 +72,7 @@ button {
     text-transform: uppercase;
     font-size: 2.4rem;
     font-weight: 700;
-    font-family: "Audiowide", sans-serif;
+    font-family: "Open Sans", sans-serif;
     letter-spacing: 1.5px;
     word-spacing: 5px;
 }
@@ -77,12 +81,20 @@ button {
     text-transform: lowercase;
 }
 
+.main {
+    flex-grow: 1;
+}
+
+.header {
+    flex-grow: 1;
+}
+
 .main-heading {
     font-family: "Audiowide", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 7.2rem;
-    margin-bottom: 10rem;
+    font-size: 6.4rem;
+    margin-bottom: 6rem;
     text-align: center;
     color: var(--orange);
     background-color: var(--beige);
@@ -99,7 +111,6 @@ button {
     margin-bottom: 6rem;
     width: 100%;
     align-items: center;
-    text-align: center;
     border: 7px solid var(--black);
     border-radius: 7px;
 }
@@ -114,25 +125,33 @@ button {
 
 .game-screen > * {
     flex: 1;
+    height: 24rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .game-screen img {
-    padding: 2.4rem;
-    max-width: min(256px, 50%);
+    height: 75%;
+    object-fit: contain;
+    padding: 2.4rem 0;
+    flex-grow: 1;
+}
+
+.game-screen .hidden {
     visibility: hidden;
 }
 
-.game-screen.visible img {
-    visibility: visible;
-}
-
 .game-screen .played-hand {
+    text-align: center;
     text-transform: uppercase;
+    align-self: stretch;
     font-size: 3.2rem;
     font-family: "Audiowide", sans-serif;
     background-color: var(--beige);
     color: var(--orange);
-    padding: 1.2rem 2.4rem;
+    padding: 1rem 0;
 }
 
 .buttons {
@@ -192,7 +211,6 @@ button {
 .score-box .score {
     color: var(--orange);
     font-size: 6.4rem;
-    padding: 2rem;
     background-color: var(--beige);
 }
 
@@ -210,4 +228,44 @@ button {
 
 .score.computer-score {
     border-left: 2.5px solid var(--black);
+}
+
+.footer {
+    text-align: center;
+    color: var(--black);
+    padding: 1.2rem;
+    background-color: var(--beige);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-grow: 1;
+}
+
+.footer p {
+    font-weight: 300;
+}
+
+.footer img {
+    width: 2.4rem;
+}
+
+/* Pop Animation */
+@keyframes pop-in {
+    0% {
+        transform: scale(0); /* Start completely invisible/tiny */
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2); /* Grow slightly bigger than normal (bounce) */
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1); /* Settle back to normal size */
+    }
+}
+
+/* class that we add to for pop-in effect */
+.animate-pop {
+    animation: pop-in 0.5s ease-out;
 }

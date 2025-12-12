@@ -1,23 +1,7 @@
-let humanScore = 0;
-let computerScore = 0;
-
-function getHumanChoice() {
-    let choice = prompt("Choose b/w rock, paper and scissors")
-        .toLowerCase()
-        .trim();
-    const choiceArray = ["rock", "paper", "scissors"];
-    if (choice && choiceArray.includes(choice))
-        // checks for undefined values
-        return choice;
-    else {
-        choice = prompt("You Chose wrong, Try again").toLowerCase().trim();
-        if (choice && choiceArray.includes(choice)) return choice;
-        else {
-            alert("Well, You chose wrong again, computer wins by default");
-            return "";
-        }
-    }
-}
+const humanScore = document.querySelector(".human-score");
+const computerScore = document.querySelector(".computer-score");
+const overlayBtn = document.querySelector(".overlay-btn");
+const handSigns = document.querySelectorAll(".buttons img");
 
 function getComputerChoice() {
     const choiceArray = ["rock", "paper", "scissors"];
@@ -25,43 +9,66 @@ function getComputerChoice() {
     return choiceArray[random];
 }
 
-function playRound(humanChoice, computerChoice) {
-    if (humanChoice) {
-        console.log(
-            `human chose ${humanChoice} and computer chose ${computerChoice}`
-        );
-        if (humanChoice == computerChoice) {
-            console.log("It's a draw");
-        } else {
-            if (humanChoice == "rock") {
-                if (computerChoice == "paper") computerScore++;
-                else humanScore++;
-            } else if (humanChoice == "paper") {
-                if (computerChoice == "scissors") computerScore++;
-                else humanScore++;
-            } else {
-                // here the choice will default to scissors for the human
-                if (computerChoice == "rock") computerScore++;
-                else humanScore++;
-            }
-        }
-    } else {
-        console.log(
-            "human chose the wrong option and computer wins by default"
-        );
-        computerScore++;
-    }
+function displayChoice(humanChoice, computerChoice) {
+    const userChoiceImg = document.getElementById("user-choice--img");
+    const computerChoiceImg = document.getElementById("computer-choice--img");
+    userChoiceImg.src = `images/${humanChoice}.svg`;
+    computerChoiceImg.src = `images/${computerChoice}.svg`;
+    userChoiceImg.classList.remove("hidden");
+    computerChoiceImg.classList.remove("hidden");
+    userChoiceImg.classList.remove("animate-pop");
+    computerChoiceImg.classList.remove("animate-pop");
+
+    // restart animation by forcing reflow as animations don't restart by default
+    // calculate the computed width of the element and return undefined(because of void) as we no use of the value itself
+    void userChoiceImg.offsetWidth;
+
+    userChoiceImg.classList.add("animate-pop");
+    computerChoiceImg.classList.add("animate-pop");
 }
 
-const overlayBtn = document.querySelector(".overlay-btn");
-const handSigns = document.querySelectorAll(".buttons img");
+function playRound(humanChoice) {
+    const computerChoice = getComputerChoice();
+    displayChoice(humanChoice, computerChoice);
+    let hScore = parseInt(humanScore.textContent);
+    let cScore = parseInt(computerScore.textContent);
+    if (humanChoice == computerChoice) {
+        console.log("It's a draw");
+    } else {
+        if (humanChoice == "rock") {
+            if (computerChoice == "paper") {
+                computerScore.textContent = cScore + 1;
+            } else {
+                humanScore.textContent = hScore + 1;
+            }
+        } else if (humanChoice == "paper") {
+            if (computerChoice == "scissors") {
+                computerScore.textContent = cScore + 1;
+            } else {
+                humanScore.textContent = hScore + 1;
+            }
+        } else {
+            if (computerChoice == "rock") {
+                computerScore.textContent = cScore + 1;
+            } else {
+                humanScore.textContent = hScore + 1;
+            }
+        }
+    }
+    console.log(
+        `human chose ${humanChoice} and computer chose ${computerChoice}`
+    );
+}
+
 function removeOverlay() {
     overlayBtn.parentElement.classList.remove("game-start");
 }
 
+// once
+overlayBtn.addEventListener("click", removeOverlay);
+
 handSigns.forEach((handSign) =>
     handSign.addEventListener("click", function (e) {
-        console.log(e.target.getAttribute("data-value"));
+        playRound(e.target.getAttribute("data-value"));
     })
 );
-overlayBtn.addEventListener("click", removeOverlay);

@@ -31,19 +31,21 @@
         <main class="main">
             <div class="game-container">
                 <div class="game-screen">
-                    <div class="human-hand">
+                    <div class="game-screen--left">
                         <img
-                            src="images/rock.svg"
-                            alt="rock hand sign"
-                            class="hand-sign--big"
+                            src=""
+                            alt="Your choice"
+                            class="hidden"
+                            id="user-choice--img"
                         />
                         <p class="played-hand">Human</p>
                     </div>
-                    <div class="computer-hand">
+                    <div class="game-screen--right">
                         <img
-                            src="images/rock.svg"
-                            alt="rock hand sign"
-                            class="hand-sign--big"
+                            src=""
+                            alt="Computer Choice"
+                            class="hidden"
+                            id="computer-choice--img"
                         />
                         <p class="played-hand">Computer</p>
                     </div>
@@ -91,5 +93,20 @@
                 </div>
             </div>
         </main>
+        <footer class="footer">
+            <p>
+                Copyright ©
+                <script>
+                    document.write(new Date().getFullYear());
+                </script>
+                Avinash
+            </p>
+            <a
+                href="https://github.com/avinash4364/rock-paper-scissors/tree/rps-ui"
+                target="_blank"
+            >
+                <img class="github-logo" src="images/github.svg" />
+            </a>
+        </footer>
     </body>
 </html>
